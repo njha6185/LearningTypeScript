@@ -190,3 +190,43 @@ class GoogleCalender implements Calender{
   }
   
 }
+
+//what is difference between type and interface
+// type is used to define the structure of an object
+// interface is used to define the structure of an object
+// type and interface are both used to define the structure of an object
+/*
+Interface:
+
+Can only be used to define object types (not primitive types like string or number)
+Can be extended using the extends keyword
+Can be implemented by a class
+Can define methods and properties
+Type:
+
+Can be used to define any type, including primitive types, object types, and union types
+Cannot be extended or implemented
+Can define type aliases, union types, and intersection types
+In general, if you need to define a blueprint for an object that can be implemented by a class, use an interface. If you need to define a type alias or a more complex type, use a type.
+
+Here's an example:
+
+typescript
+CopyInsert
+// Interface
+interface Person {
+  name: string;
+  age: number;
+}
+
+// Type
+type StringOrNumber = string | number;
+Note that in TypeScript 4.2 and later, the differences between type and interface are less pronounced, and type can be used to define object types that are similar to interfaces. However, the distinctions above still hold in general.
+
+
+
+
+
+
+
+**/
