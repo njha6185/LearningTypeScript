@@ -55,6 +55,7 @@ console.log(account instanceof Account);
 
 
 class SeatAssignment {
+  //index signature property
   [seatNumber: string]: string;
 }
 
@@ -66,8 +67,126 @@ console.log(seats["a1"]);
 
 
 //static method
+class Ride{
+  private static _activeRides:number = 0;
+  start(){Ride._activeRides++}
+  stop(){Ride._activeRides--}
+
+
+ static get activeRides ():number{
+    return Ride._activeRides
+  }
+}
+
+let ride = new Ride();
+ride.start();
+ride.stop();
+ride.start();
+ride.start();
+ride.start();
+
+console.log(Ride.activeRides);
+
 class C {
   static hello() {
     console.log("Hello");
   }
+}
+
+//inheritance
+ class Person{
+  constructor(public firstName: string, public lastName: string){}
+  get fullName():string{
+    return this.firstName + " " + this.lastName
+  }
+  walk():void{
+    console.log("walk");
+    
+  }
+ }
+
+ class Student extends Person{
+  constructor(public id:number, firstName: string, lastName: string){
+    super(firstName, lastName)
+  }
+
+  greet():void{
+    console.log("Hello greeting of day"); 
+  }
+
+ }
+
+ const st1=new Student(1,'a','b')
+ st1.greet()
+ console.log(st1.fullName);
+
+ class Teacher extends Person{
+  override get fullName():string{
+    return "Proff. "+super.fullName
+  }
+ }
+
+ const t1=new Teacher('a','b')
+ console.log(t1.fullName);
+ // noImplicitOverride true, it will throw an error if a method is not marked as overrided
+
+
+ let printNames:Person[]=[
+  new Student(1,'a1','b'),
+  new Teacher('a2','b')
+ ]
+
+ function logNames(persons:Person[]){
+  persons.forEach(p=>console.log(p.fullName))
+ }
+ logNames(printNames)
+
+ //Abstract class, instance of abstract class cannot be created
+
+ abstract class Shape{
+  constructor(public color:string){}
+  abstract render():void
+ }
+
+ class Circle extends Shape{
+  constructor(public radius:number, color:string){
+    super(color)
+  }
+  override render(): void {
+    console.log("render circle");
+    
+  }
+ }
+
+ let c1=new Circle(10,'red')
+ c1.render()
+
+ //interface , it is used to define the structure of an object
+
+// use interface when no logic is required, it is used to define the structure of an object while in abstract class we can have logic
+
+interface Calender{
+  name:string;
+  addEvent(date:Date):void
+  removeEvent(date:Date):void
+  getEvents():Date[]
+}
+
+interface CloudCalender extends Calender{
+  saveEvent(date:Date):void
+}
+
+class GoogleCalender implements Calender{
+  constructor(public name: string) {
+  }
+  addEvent(date: Date): void {
+    throw new Error("Method not implemented.");
+  }
+  removeEvent(date: Date): void {
+    throw new Error("Method not implemented.");
+  }
+  getEvents(): Date[] {
+    throw new Error("Method not implemented.");
+  }
+  
 }
